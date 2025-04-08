@@ -105,6 +105,8 @@
   ],
   "Quizzes": [
     {
+      "category":"Science",
+      "quizid":"S1",
       "question": "What planet do we live on?",
       "answer": "Earth",
       "option1": "Mars",
@@ -113,6 +115,8 @@
       "option4": "Jupiter"
     },
     {
+      "category":"Science",
+      "quizid":"S2",
       "question": "What do plants need to make food?",
       "answer": "Both",
       "option1": "Water",
@@ -121,6 +125,8 @@
       "option4": "None"
     },
     {
+      "category":"Science",
+      "quizid":"S3",
       "question": "Which part of the body helps us see?",
       "answer": "Eyes",
       "option1": "Nose",
