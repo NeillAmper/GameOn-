@@ -1,0 +1,107 @@
+{
+    "AdventureQuiz": [{
+            "startScenario": "Your journey begins at the entrance of ancient jungle ruins. A massive stone door blocks your path. A riddle is etched into its surface\u2014solve it to begin your quest.",
+            "endScenarios": {
+                "correct": "The stone door rumbles open. A warm breeze and the scent of adventure greet you as you step into the unknown.",
+                "wrong": "The door opens... but only partially. You squeeze through and scrape your arm. You\u2019ve made it in, but you feel uneasy, as if you disturbed something ancient."
+            }
+        }, {
+            "startScenario": "Beyond the door, you enter a dimly lit chamber. A forest spirit materializes from a glowing mushroom circle. 'Only those who respect nature may pass,' it whispers.",
+            "endScenarios": {
+                "correct": "The spirit grants you a glowing leaf talisman and reveals a hidden path leading into the heart of the forest.",
+                "wrong": "The spirit sighs and disappears. The ground trembles, and the path forward becomes overgrown with thorny vines."
+            }
+        }, {
+            "startScenario": "As you walk deeper into the forest, you find a floating pedestal bathed in moonlight. A riddle appears in glowing text above it.",
+            "endScenarios": {
+                "correct": "The pedestal hums gently and reveals a shimmering map, showing the path to a sacred grove.",
+                "wrong": "The pedestal crackles and vanishes. Your map turns blank, leaving you to trust your instincts."
+            }
+        }, {
+            "startScenario": "You arrive at the grove, where a wise owl watches you from an ancient tree. 'To find truth, one must look within,' it hoots.",
+            "endScenarios": {
+                "correct": "The owl blinks slowly and reveals a hidden stairwell beneath its perch.",
+                "wrong": "The owl flies off. You search the grove blindly and stumble into the stairwell by accident, bruised and confused."
+            }
+        }, {
+            "startScenario": "The stairwell leads to a chasm. A rainbow bridge made of light flickers in the air. A crystal guardian blocks the way.",
+            "endScenarios": {
+                "correct": "The guardian bows and allows you to pass. The bridge holds firm under your steps.",
+                "wrong": "The guardian disappears. You step onto the bridge and fall\u2014only to land in a hidden cavern below, alive but shaken."
+            }
+        }, {
+            "startScenario": "The cavern leads you to an old wooden library. A dusty book floats before you. 'Only the curious may unlock my secrets,' it beckons.",
+            "endScenarios": {
+                "correct": "The book flips open, granting you knowledge of ancient spells and the name of the final trial.",
+                "wrong": "The book slams shut. Shadows swirl around you, whispering forgotten names."
+            }
+        }, {
+            "startScenario": "You surface at a mountain pass where dwarves guard a stone gate. 'Prove your wit, and we\u2019ll forge you a weapon of destiny.'",
+            "endScenarios": {
+                "correct": "They cheer and hand you a glowing sword made from starlight.",
+                "wrong": "They shake their heads and give you a dull dagger. 'It may still serve you... somehow.'"
+            }
+        }, {
+            "startScenario": "At the summit, a ruined temple awaits. A throne sits at the center with a crystal orb floating above. A voice dares you to claim its power.",
+            "endScenarios": {
+                "correct": "You grasp the orb and feel divine energy surge through you. Visions of destiny unfold before your eyes.",
+                "wrong": "The orb shatters. You are knocked back, injured, and the throne crumbles into dust."
+            }
+        }, {
+            "startScenario": "You descend into a village engulfed in fog. At its center is a glowing well. 'Speak truth, and be healed,' says a sign.",
+            "endScenarios": {
+                "correct": "You speak from the heart. The fog lifts and the villagers reappear, cheering for their hero.",
+                "wrong": "You lie. The well turns black. The fog thickens, and shadows follow your every move."
+            }
+        }, {
+            "startScenario": "At last, you reach the sacred peak. A phoenix descends from the heavens. 'Final seeker, are you ready to shape your fate?' it cries.",
+            "endScenarios": {
+                "correct": "You answer boldly. The phoenix lifts you into the sky, flames of hope spreading across the realm. You are remembered as a legend.",
+                "wrong": "You falter. The phoenix turns away. A storm brews, and the world below falls into shadow. Your name fades into myth."
+            }
+        }],
+    "Quizzes": [{
+            "question": "What do plants need to make food?",
+            "answer": "Both",
+            "quizid": "S2",
+            "option3": "Both",
+            "option4": "None",
+            "option1": "Water",
+            "option2": "Sunlight",
+            "category": "Science"
+        }, {
+            "question": "Which part of the body helps us see?",
+            "answer": "Eyes",
+            "quizid": "S3",
+            "option3": "Ears",
+            "option4": "Hands",
+            "option1": "Nose",
+            "option2": "Eyes",
+            "category": "Science"
+        }],
+    "users": [{
+            "password": "password1",
+            "type": "Game Master",
+            "username": "user1"
+        }, {
+            "password": "password2",
+            "type": "Player",
+            "username": "user2"
+        }, {
+            "password": "test1",
+            "type": "Game Master",
+            "username": "test1"
+        }, {
+            "password": "test2",
+            "type": "Player",
+            "username": "test2"
+        }, {
+            "password": "test3",
+            "type": "Game Master",
+            "username": "test3"
+        }, {
+            "password": "test10",
+            "type": "Game Master",
+            "username": "test10"
+        }]
+}
