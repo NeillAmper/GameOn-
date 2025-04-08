@@ -1,19 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
-/**
- *
- * @author neillamper
- */
+import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+
+
 public class DeleteQuiz extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DeleteQuiz
-     */
+    private static final String FILE_PATH = "C:\\Users\\My PC\\OneDrive\\Documents\\NetBeansProjects\\Changes\\src\\Main\\GameOn--main\\GameOn--main\\src\\Accounts.json";
+    private static final JSONParser jsonParser = new JSONParser();
+    private static JSONObject record = new JSONObject();
+    private static JSONArray userlist = new JSONArray();
+    private static JSONArray outerlist = new JSONArray();
+    
     public DeleteQuiz() {
         initComponents();
+        
+        deletequiztable() ;
+        
     }
 
     /**
@@ -146,6 +159,53 @@ public class DeleteQuiz extends javax.swing.JFrame {
                 new DeleteQuiz().setVisible(true);
             }
         });
+    }
+    
+    public void deletequiztable() {
+        
+        try {
+            
+            filecheck() ;
+            
+            for (int i = 0; i < userlist.size(); i++) {
+            JSONObject obj = (JSONObject) userlist.get(i) ;
+            
+            System.out.println(obj.getClass().getName().toString());
+            
+            
+            
+                
+            }
+             
+        } catch (HeadlessException | IOException | ParseException e) {
+            Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(null, "An error occurred while logging in.", "Error!", JOptionPane.ERROR_MESSAGE);
+            // These lines of code catches any errors that happen during the login process and shows an error message.
+        
+    }
+}
+    
+    public void filecheck() throws FileNotFoundException, IOException, ParseException {
+        FileReader reader = new FileReader(FILE_PATH);
+
+        if (reader.ready()) {
+            Scanner scan = new Scanner(reader);
+            String line = "";
+
+            while (scan.hasNext()) {
+                line = line + scan.nextLine();
+            }
+            reader.close();
+            if (!line.equals("")) {
+                reader.close();
+                try (FileReader reader2 = new FileReader(FILE_PATH)) {
+                    record = (JSONObject) jsonParser.parse(reader2);
+                    userlist = (JSONArray) record.get("Quizzes");
+                } catch (IOException a) {
+                    System.out.println("error");
+                }
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

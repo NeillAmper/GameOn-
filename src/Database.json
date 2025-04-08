@@ -1,0 +1,132 @@
+{
+    "users": [
+        {
+            "password": "password1",
+            "type": "Game Master",
+            "username": "user1"
+        },
+        {
+            "password": "password2",
+            "type": "Player",
+            "username": "user2"
+        },
+        {
+            "password": "test1",
+            "type": "Game Master",
+            "username": "test1"
+        },
+        {
+            "password": "test2",
+            "type": "Player",
+            "username": "test2"
+        },
+        {
+            "password": "test3",
+            "type": "Game Master",
+            "username": "test3"
+        },
+        {
+            "password": "test10",
+            "type": "Game Master",
+            "username": "test10"
+        }
+    ],
+    "AdventureQuiz": [
+        {
+            "startScenario": "You stand before an ancient stone door deep in the jungle ruins. It's locked tight. A riddle is etched into the stone. Solve it to proceed.",
+            "endScenarios": {
+                "correct": "The stone door rumbles open, revealing a chamber filled with golden treasures and mystical relics.",
+                "wrong": "The door stays shut, and the ground beneath you collapses. You fall into a pit of spikes\u2014game over."
+            }
+        },
+        {
+            "startScenario": "A mysterious forest spirit blocks your path. 'Answer my question to earn passage,' it says.",
+            "endScenarios": {
+                "correct": "The spirit bows and vanishes into the mist, revealing a glowing path leading forward.",
+                "wrong": "The spirit curses the ground, causing vines to ensnare you. You\u2019re dragged into the darkness."
+            }
+        },
+        {
+            "startScenario": "A glowing pedestal floats in the center of a cavern. It pulses with energy. 'Prove your worth to claim the Eye of Knowledge,' a voice whispers.",
+            "endScenarios": {
+                "correct": "The Eye rises from the pedestal and floats into your hand. You feel ancient wisdom flowing through you.",
+                "wrong": "The pedestal cracks and a blinding light knocks you unconscious. You wake up empty-handed at the dungeon\u2019s entrance."
+            }
+        },
+        {
+            "startScenario": "You encounter a talking owl perched on a tree. 'Answer this to pass through the enchanted grove,' it hoots.",
+            "endScenarios": {
+                "correct": "The owl nods, flaps its wings, and parts the tangled trees to reveal a secret path.",
+                "wrong": "The owl turns away. The forest grows thicker and you lose your way, endlessly wandering."
+            }
+        },
+        {
+            "startScenario": "A bridge made of rainbow light stretches over a chasm. A crystal guardian stands before it. 'Only the wise may cross,' it says.",
+            "endScenarios": {
+                "correct": "The bridge glows brighter and supports your steps as you cross safely.",
+                "wrong": "The light dims. You take one step and fall into the swirling abyss below."
+            }
+        },
+        {
+            "startScenario": "You find a dusty, old book with a riddle on its cover. Solving it may reveal hidden power.",
+            "endScenarios": {
+                "correct": "The book bursts open, releasing a protective aura around you. You gain magical insight.",
+                "wrong": "The book slams shut and vanishes. A ghostly laugh echoes behind you as you feel your strength fade."
+            }
+        },
+        {
+            "startScenario": "A group of dwarves challenge you to answer a puzzle to be granted safe passage through the mountains.",
+            "endScenarios": {
+                "correct": "The dwarves cheer and guide you through a secret tunnel filled with ancient artifacts.",
+                "wrong": "The dwarves frown and turn away. You're left to climb the treacherous peaks alone."
+            }
+        },
+        {
+            "startScenario": "In a ruined temple, you discover a throne with a glowing gem. A voice dares you to answer correctly to claim its power.",
+            "endScenarios": {
+                "correct": "The gem floats into your hand, imbuing you with the power of light.",
+                "wrong": "Dark smoke bursts from the gem, surrounding you. You black out and awaken back at the temple's entrance."
+            }
+        },
+        {
+            "startScenario": "You find a well in the middle of a quiet village. A sign reads: 'Answer truthfully to receive a blessing.'",
+            "endScenarios": {
+                "correct": "The well shines with golden light and a healing aura surrounds you.",
+                "wrong": "The well bubbles dark water. A curse befalls you, weakening your resolve."
+            }
+        },
+        {
+            "startScenario": "At the top of a snowy peak, a phoenix circles you in the sky. It lands and speaks: 'Answer wisely, for your fate burns with this choice.'",
+            "endScenarios": {
+                "correct": "The phoenix screeches triumphantly and lifts you across the skies to your next destination.",
+                "wrong": "The phoenix turns to ash and the skies darken. A blizzard traps you on the peak."
+            }
+        }
+    ],
+    "Quizzes": [
+        {
+            "question": "What planet do we live on?",
+            "answer": "Earth",
+            "option1": "Mars",
+            "option2": "Venus",
+            "option3": "Earth",
+            "option4": "Jupiter"
+        },
+        {
+            "question": "What do plants need to make food?",
+            "answer": "Both",
+            "option1": "Water",
+            "option2": "Sunlight",
+            "option3": "Both",
+            "option4": "None"
+        },
+        {
+            "question": "Which part of the body helps us see?",
+            "answer": "Eyes",
+            "option1": "Nose",
+            "option2": "Eyes",
+            "option3": "Ears",
+            "option4": "Hands"
+        }
+    ]
+}

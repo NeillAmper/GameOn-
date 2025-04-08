@@ -18,10 +18,12 @@ public class CreateQuiz extends javax.swing.JFrame {
 
     private static String gameid, category, numberofquiz, question, opt1, opt2, opt3, opt4, correctanswer;
 
-    private static final String FILE_PATH = "//src//Accounts.json";
+    private static final String FILE_PATH = "src/Database.json";
     private static final JSONParser jsonParser = new JSONParser();
     private static JSONObject record = new JSONObject();
     private static JSONArray userlist = new JSONArray();
+    private static JSONArray outerlist = new JSONArray();
+    int questioncounter ;
 
     
     /**
@@ -29,6 +31,10 @@ public class CreateQuiz extends javax.swing.JFrame {
      */
     public CreateQuiz() {
         initComponents();
+        
+        
+        labelquestioncounter.setText("Question:" +  (questioncounter + 1));
+                
     }
 
     /**
@@ -47,7 +53,7 @@ public class CreateQuiz extends javax.swing.JFrame {
         categorybox = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         idgame = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        labelquestioncounter = new javax.swing.JLabel();
         questionUI = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
         opt1UI = new javax.swing.JTextField();
@@ -59,8 +65,8 @@ public class CreateQuiz extends javax.swing.JFrame {
         opt4UI = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         Back = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        numberquiz = new javax.swing.JTextField();
+        savequiz = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -84,13 +90,7 @@ public class CreateQuiz extends javax.swing.JFrame {
 
         jLabel3.setText("Quiz ID:");
 
-        idgame.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idgameActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Question #1:");
+        labelquestioncounter.setText("Question #1:");
 
         questionUI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,7 +132,7 @@ public class CreateQuiz extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("CREATE QUIZ");
+        jButton1.setText("ADD QUESTION");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -146,11 +146,17 @@ public class CreateQuiz extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("# of Questions");
-
-        numberquiz.addActionListener(new java.awt.event.ActionListener() {
+        savequiz.setText("SAVE QUIZ");
+        savequiz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numberquizActionPerformed(evt);
+                savequizActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("CLEAR QUESTION AND ANSWERS");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -159,25 +165,31 @@ public class CreateQuiz extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(98, 98, 98))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(savequiz))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(87, 87, 87)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 27, Short.MAX_VALUE)
+                                .addGap(0, 24, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jRadioButton2)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel1)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jLabel5)
-                                                .addComponent(jLabel2))
+                                            .addGap(26, 26, 26)
+                                            .addComponent(jLabel2)
                                             .addGap(53, 53, 53)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(categorybox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(numberquiz)))
-                                        .addComponent(jLabel4)
+                                            .addComponent(categorybox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(labelquestioncounter)
                                         .addComponent(jLabel3))
                                     .addComponent(jRadioButton3))
                                 .addGap(54, 54, 54))
@@ -189,15 +201,6 @@ public class CreateQuiz extends javax.swing.JFrame {
                                 .addComponent(jRadioButton4)
                                 .addGap(15, 15, 15)
                                 .addComponent(opt4UI))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(206, 206, 206)
-                                .addComponent(jButton1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(Back)))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -207,7 +210,11 @@ public class CreateQuiz extends javax.swing.JFrame {
                         .addGap(202, 202, 202)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(idgame, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(questionUI))))
+                            .addComponent(questionUI)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(Back)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(39, 39, 39))
         );
         jPanel1Layout.setVerticalGroup(
@@ -217,11 +224,7 @@ public class CreateQuiz extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(Back))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(numberquiz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(categorybox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -231,7 +234,7 @@ public class CreateQuiz extends javax.swing.JFrame {
                     .addComponent(idgame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(labelquestioncounter)
                     .addComponent(questionUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -246,19 +249,23 @@ public class CreateQuiz extends javax.swing.JFrame {
                     .addComponent(jRadioButton3)
                     .addComponent(opt3UI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRadioButton4)
                     .addComponent(opt4UI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(savequiz))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,7 +279,10 @@ public class CreateQuiz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
+        
+        correctanswer = opt1UI.getText() ;
+        System.out.println(correctanswer) ;
+        
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
@@ -282,24 +292,24 @@ public class CreateQuiz extends javax.swing.JFrame {
     }//GEN-LAST:event_BackActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
-        // TODO add your handling code here:
+        
+        correctanswer = opt4UI.getText() ;
+        System.out.println(correctanswer) ;
+        
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
+       
+        correctanswer = opt2UI.getText() ;
+        System.out.println(correctanswer) ;
+        
     }//GEN-LAST:event_jRadioButton2ActionPerformed
-
-    private void numberquizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberquizActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_numberquizActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         try {
-
-        numberofquiz = numberquiz.getText().trim();
-        gameid = idgame.getText().trim();
-        category = categorybox.getItemAt(WIDTH) ;
+        
+        category = (String) categorybox.getSelectedItem() ;
         question = questionUI.getText() ;
         opt1 = opt1UI.getText() ;
         opt2 = opt2UI.getText() ;
@@ -308,43 +318,30 @@ public class CreateQuiz extends javax.swing.JFrame {
 
         //These lines of code retrieve user input from text fields and remove any spaces, declaring and initializing to store the input.
 
-        if (numberofquiz.isEmpty() && gameid.isEmpty() && category.isEmpty() && question.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please enter an existing Username and Password.", "Input needed", JOptionPane.ERROR_MESSAGE);
+        if (question.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter an Question.", "Input needed", JOptionPane.ERROR_MESSAGE);
             return;
             // These lines of code prompts and checks if both username and password fields are empty.
         }
-
-        if (numberofquiz.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please enter an existing Username.", "Input needed", JOptionPane.ERROR_MESSAGE);
+        
+        if (correctanswer.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Please enter an Correctanswer.", "Input needed", JOptionPane.ERROR_MESSAGE);
             return;
-            // These lines of code prompts and checks if the username field is empty, asking the user to enter an existing username.
-        }
-
-        if (gameid.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please enter a Password.", "Input needed", JOptionPane.ERROR_MESSAGE);
-            return;
-            // These lines of code prompts and checks if the password field is empty, asking the user to enter an existing username's password.
+            // These lines of code prompts and checks if both username and password fields are empty.
         }
         
-        if (question.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please enter a Password.", "Input needed", JOptionPane.ERROR_MESSAGE);
+        if (opt1.isBlank() && opt2.isBlank() && opt3.isBlank() && opt4.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Please enter an Option.", "Input needed", JOptionPane.ERROR_MESSAGE);
             return;
-            // These lines of code prompts and checks if the password field is empty, asking the user to enter an existing username's password.
+            // These lines of code prompts and checks if both username and password fields are empty.
         }
-        
-        
-            
-            int numberofquizzes = Integer.parseInt(numberofquiz); // Converts string to int
-
             
             // These lines of code retrieves the entered username and password from the text fields.
 
             filecheck(); //Calls the filecheck method to read the data in the json file.
 
-            JSONArray id = new JSONArray() ;
-            JSONObject content = new JSONObject() ;
             
-            for (int i = 0; i < numberofquizzes; i++) {
+            JSONObject content = new JSONObject() ;
                 
                 content.put("question", question) ;
                 content.put("category", category) ;
@@ -354,32 +351,22 @@ public class CreateQuiz extends javax.swing.JFrame {
                 content.put("option#4", opt4) ;
                 content.put("correctanswer", correctanswer);
                 
-                id.add(content) ;
                 
+                outerlist.add(content) ;
                 
-                if (i ==  numberofquizzes) {
+                System.out.println("in object added") ;
+                
                     
-                    try (FileWriter file = new FileWriter(FILE_PATH)) {
-                    
-                     // These lines of code catches any errors that happen during the login process and shows an error message.
-                    record.put(gameid, id) ;
-                    
-                    file.write(record.toJSONString());
-                    System.out.println(userlist) ;
-                    
-                    JOptionPane.showMessageDialog(null, "Changes saved");
-                    
+                System.out.println("sucess") ;
+                try (FileWriter file = new FileWriter(FILE_PATH)) {
+                // These lines of code catches any errors that happen during the login process and shows an error message.;
+                questioncounter++ ;
                     
                     } catch (FileNotFoundException e) {
                     Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, e);
                     JOptionPane.showMessageDialog(null, "An error occurred while logging in.", "Error!", JOptionPane.ERROR_MESSAGE);
                     // These lines of code catches any errors that happen during the login process and shows an error message.
                     }
-                    break ;                
-                }
-
-            } 
-        
             
         } catch (HeadlessException | IOException | ParseException e) {
             Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, e);
@@ -393,10 +380,6 @@ public class CreateQuiz extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void idgameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idgameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idgameActionPerformed
-
     private void questionUIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionUIActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_questionUIActionPerformed
@@ -406,8 +389,54 @@ public class CreateQuiz extends javax.swing.JFrame {
     }//GEN-LAST:event_opt2UIActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-        // TODO add your handling code here:
+       
+        correctanswer = opt3UI.getText() ;
+        System.out.println(correctanswer) ;
+        
     }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    private void savequizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savequizActionPerformed
+        
+        gameid = idgame.getText().trim();
+        category = categorybox.getItemAt(WIDTH) ;
+        
+        try {
+            
+            if (gameid.isEmpty() && category.isEmpty() ) {
+                
+                JOptionPane.showMessageDialog(null, "Please enter an existing ID and Category.", "Input needed", JOptionPane.ERROR_MESSAGE);
+                
+            }
+            
+            filecheck() ;
+            
+            JSONObject save = new  JSONObject() ;
+            
+            save.put(gameid, outerlist) ;
+            userlist.add(save) ;
+            
+            savefile() ;
+            
+            JOptionPane.showMessageDialog(null, "Successfuly Saved Changes.");
+            GameMaster back = new GameMaster() ;
+            back.setVisible(true) ;
+            
+            
+        } catch (HeadlessException | IOException | ParseException e) {
+            Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(null, "An error occurred while logging in.", "Error!", JOptionPane.ERROR_MESSAGE);
+            // These lines of code catches any errors that happen during the login process and shows an error message.
+        }
+    }//GEN-LAST:event_savequizActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        questionUI.setText("");
+        opt1UI.setText("");
+        opt2UI.setText("");
+        opt3UI.setText("");
+        opt4UI.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -444,8 +473,27 @@ public class CreateQuiz extends javax.swing.JFrame {
         });
     }
 
+    public JSONArray getjsonarraynamess() {
+        
+        return outerlist ;
+        
+    
+    
+}
    
-
+public static void savefile() throws FileNotFoundException, IOException, ParseException {
+            
+            try (FileWriter writer = new FileWriter(FILE_PATH)) {
+              
+            JSONObject overwrite = new JSONObject();
+            overwrite.put("Quizzes", userlist) ;
+            
+            writer.write(overwrite.toJSONString());
+            System.out.println("student data saved successfully.");
+        } catch (Exception e) {
+            System.out.println("student saving data to file: " + e.getMessage());
+        }
+}
     
     public void filecheck() throws FileNotFoundException, IOException, ParseException {
         FileReader reader = new FileReader(FILE_PATH);
@@ -475,22 +523,22 @@ public class CreateQuiz extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> categorybox;
     private javax.swing.JTextField idgame;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JTextField numberquiz;
+    private javax.swing.JLabel labelquestioncounter;
     private javax.swing.JTextField opt1UI;
     private javax.swing.JTextField opt2UI;
     private javax.swing.JTextField opt3UI;
     private javax.swing.JTextField opt4UI;
     private javax.swing.JTextField questionUI;
+    private javax.swing.JButton savequiz;
     // End of variables declaration//GEN-END:variables
 }

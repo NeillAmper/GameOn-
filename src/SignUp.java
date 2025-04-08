@@ -16,7 +16,7 @@ public class SignUp extends javax.swing.JFrame {
 
     private static String addname, addpass, addtype;
 
-    private static final String FILE_PATH = "src/Accounts.json";
+    private static final String FILE_PATH = "src/Database.json";
     private static final JSONParser jsonParser2 = new JSONParser();
     private static JSONObject record = new JSONObject();
     private static JSONArray userlist = new JSONArray();
