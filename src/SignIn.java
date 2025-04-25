@@ -16,13 +16,14 @@ public class SignIn extends javax.swing.JFrame {
 
     private static String usname, pass;
 
-    private static final String FILE_PATH = "src/Database.json";
+    private static final String FILE_PATH = "src/UserData.json";
     private static final JSONParser jsonParser = new JSONParser();
     private static JSONObject record = new JSONObject();
     private static JSONArray userlist = new JSONArray();
 
-    public SignIn() {
+    public SignIn(String usname, String pass) {
         initComponents();
+        this.usname = usname;
     }
 
     /**
@@ -38,78 +39,80 @@ public class SignIn extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         Username = new javax.swing.JTextField();
-        Password = new javax.swing.JTextField();
         SignIn = new javax.swing.JButton();
+        show = new javax.swing.JLabel();
+        hide = new javax.swing.JLabel();
         SignUpButton = new javax.swing.JButton();
+        Password = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jLabel3.setText("Sign In");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel3.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
+        jLabel3.setText("Sign In");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
+
+        Username.setFont(new java.awt.Font("OCR A Extended", 1, 14)); // NOI18N
         Username.setText("Username");
         Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UsernameActionPerformed(evt);
             }
         });
+        jPanel1.add(Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 220, 40));
 
-        Password.setText("Password");
-
+        SignIn.setBackground(new java.awt.Color(204, 0, 51));
+        SignIn.setFont(new java.awt.Font("OCR A Extended", 1, 18)); // NOI18N
+        SignIn.setForeground(new java.awt.Color(255, 255, 255));
         SignIn.setText("Sign In");
+        SignIn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         SignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SignInActionPerformed(evt);
             }
         });
+        jPanel1.add(SignIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, 160, 40));
 
+        show.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/show.png"))); // NOI18N
+        show.setText("jLabel4");
+        jPanel1.add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 190, 40, 20));
+
+        hide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/hide.png"))); // NOI18N
+        hide.setText("jLabel5");
+        hide.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                hideMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                hideMouseReleased(evt);
+            }
+        });
+        jPanel1.add(hide, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 190, 40, 20));
+
+        SignUpButton.setBackground(new java.awt.Color(204, 0, 51));
+        SignUpButton.setFont(new java.awt.Font("OCR A Extended", 1, 18)); // NOI18N
+        SignUpButton.setForeground(new java.awt.Color(255, 255, 255));
         SignUpButton.setText("Sign Up");
+        SignUpButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         SignUpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SignUpButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(SignUpButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 160, 40));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
-                                .addComponent(SignUpButton)))))
-                .addGap(69, 69, 69))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(SignIn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SignUpButton))
-                .addGap(27, 27, 27)
-                .addComponent(SignIn)
-                .addContainerGap(84, Short.MAX_VALUE))
-        );
+        Password.setFont(new java.awt.Font("OCR A Extended", 1, 14)); // NOI18N
+        Password.setText("Password");
+        jPanel1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 220, 40));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sign In BG.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,85 +135,125 @@ public class SignIn extends javax.swing.JFrame {
 
     private void SignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInActionPerformed
         String username = Username.getText().trim();
-        String password = Password.getText().trim();
-        //These lines of code retrieve user input from text fields and remove any spaces, declaring and initializing to store the input.
+        char[] passwordChars = Password.getPassword(); // Use getPassword() instead
+        String password = new String(passwordChars); // Convert to String only if necessary
 
-        if (username.isEmpty() && password.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please enter an existing Username and Password.", "Input needed", JOptionPane.ERROR_MESSAGE);
+        if ((username.equals("Username") && password.equals("Password")) || (username.isEmpty() && password.isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Please enter an existing Username and Password.", "Input needed", JOptionPane.WARNING_MESSAGE);
             return;
-            // These lines of code prompts and checks if both username and password fields are empty.
         }
 
-        if (username.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please enter an existing Username.", "Input needed", JOptionPane.ERROR_MESSAGE);
+        if (username.isEmpty() || username.equals("Username")) {
+            JOptionPane.showMessageDialog(null, "Please enter an existing Username", "Input Information", JOptionPane.WARNING_MESSAGE);
             return;
-            // These lines of code prompts and checks if the username field is empty, asking the user to enter an existing username.
         }
 
-        if (password.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please enter a Password.", "Input needed", JOptionPane.ERROR_MESSAGE);
+        if (password.isEmpty() || password.equals("Password")) {
+            JOptionPane.showMessageDialog(null, "Please enter your Password", "Input Information", JOptionPane.WARNING_MESSAGE);
             return;
-            // These lines of code prompts and checks if the password field is empty, asking the user to enter an existing username's password.
         }
 
         try {
-            usname = Username.getText();
-            pass = Password.getText();
-            // These lines of code retrieves the entered username and password from the text fields.
+            usname = username;
+            pass = password;
 
-            filecheck(); //Calls the filecheck method to read the data in the json file.
+            filecheck(); // Load accounts from JSON file
 
-            boolean userFound = false; //This checks if there is an existing user data that matches in the json file.
-            String foundType = null; //This variable is used to store the type found in the json file(Admin or Member).
+            boolean userFound = false;
+            boolean accountAccessible = false;
+            String foundType = null;
 
             for (Object obj : userlist) {
                 JSONObject userobject = (JSONObject) obj;
                 String foundusname = (String) userobject.get("username");
                 String foundpass = (String) userobject.get("password");
+                String status = (String) userobject.get("status");
                 foundType = (String) userobject.get("type");
-                //These lines of code gets the stored data in the json file.
 
                 if (usname.equals(foundusname) && pass.equals(foundpass)) {
-                    userFound = true;
+                    if ("Accessible".equalsIgnoreCase(status)) {
+                        userFound = true;
+                        accountAccessible = true;
+                    } else {
+                        userFound = true;
+                        accountAccessible = false;
+                    }
                     break;
-                    // These lines of code compares input username and password with the stored data and sets to true if it matches.
                 }
             }
 
             if (!userFound) {
                 JOptionPane.showMessageDialog(null, "No user found!", "Login Failed", JOptionPane.ERROR_MESSAGE);
-                //If nothing was found, it will prompt and error message.
+            } else if (!accountAccessible) {
+                JOptionPane.showMessageDialog(null, "This account has been disabled. Please contact an administrator.", "Access Denied", JOptionPane.ERROR_MESSAGE);
             } else {
-                if (foundType != null && foundType.equalsIgnoreCase("Game Master")) {
-                    GameMaster x = new GameMaster();
-                    x.setVisible(true);
+                if ("Game Master".equalsIgnoreCase(foundType)) {
+                    GameMaster g = new GameMaster(usname, usname);
+                    g.setVisible(true);
                     setVisible(false);
-                    //If the user has an Admin type, it will open the Admin JFrame then it will close the Login JFrame.
-                    
-                } else if (foundType != null && foundType.equalsIgnoreCase("Player")) {
-                    Player p = new Player();
+                } else if ("Player".equalsIgnoreCase(foundType)) {
+                    Player p = new Player(usname, "Player", 1, 2, "Player", usname);
                     p.setVisible(true);
                     setVisible(false);
-                    //If the user has a Member type, it will open the Member JFrame then it will close the Login JFrame.
+                } else if ("Administrator".equalsIgnoreCase(foundType)) {
+                    // ✅ REDIRECT TO ADMINISTRATOR FRAME
+                    Administrator a = new Administrator(usname, "test");
+                    a.setVisible(true);
+                    setVisible(false);
                 }
             }
 
         } catch (HeadlessException | IOException | ParseException e) {
             Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, e);
             JOptionPane.showMessageDialog(null, "An error occurred while logging in.", "Error!", JOptionPane.ERROR_MESSAGE);
-            // These lines of code catches any errors that happen during the login process and shows an error message.
         }
     }//GEN-LAST:event_SignInActionPerformed
 
     private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed
-        SignUp a = new SignUp();
+        SignUp a = new SignUp(usname);
         a.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_SignUpButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void hideMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideMousePressed
+        show.setVisible(true);
+        hide.setVisible(false);
+        Password.setEchoChar((char) 0);
+    }//GEN-LAST:event_hideMousePressed
+
+    private void hideMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideMouseReleased
+        show.setVisible(false);
+        hide.setVisible(true);
+        Password.setEchoChar('*');
+    }//GEN-LAST:event_hideMouseReleased
+
+    public void filecheck() throws FileNotFoundException, IOException, ParseException {
+        FileReader reader = new FileReader(FILE_PATH);
+
+        if (reader.ready()) {
+            Scanner scan = new Scanner(reader);
+            StringBuilder line = new StringBuilder();
+
+            while (scan.hasNext()) {
+                line.append(scan.nextLine());
+            }
+            reader.close();
+
+            if (!line.toString().isEmpty()) {
+                try (FileReader reader2 = new FileReader(FILE_PATH)) {
+                    record = (JSONObject) jsonParser.parse(reader2);
+                    userlist = (JSONArray) record.get("Accounts");
+
+                    if (userlist == null) {
+                        userlist = new JSONArray(); // Avoid null pointer exceptions
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error reading file again: " + e.getMessage());
+                }
+            }
+        }
+    }
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -219,45 +262,24 @@ public class SignIn extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        java.awt.EventQueue.invokeLater(() -> {
-            new SignIn().setVisible(true);
-        });
+        java.awt.EventQueue.invokeLater(() -> new SignIn("Test", "Testss").setVisible(true));
     }
 
-    public void filecheck() throws FileNotFoundException, IOException, ParseException {
-        FileReader reader = new FileReader(FILE_PATH);
-
-        if (reader.ready()) {
-            Scanner scan = new Scanner(reader);
-            String line = "";
-
-            while (scan.hasNext()) {
-                line = line + scan.nextLine();
-            }
-            reader.close();
-            if (!line.equals("")) {
-                reader.close();
-                try (FileReader reader2 = new FileReader(FILE_PATH)) {
-                    record = (JSONObject) jsonParser.parse(reader2);
-                    userlist = (JSONArray) record.get("users");
-                } catch (IOException a) {
-                    System.out.println("error");
-                }
-            }
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Password;
+    private javax.swing.JPasswordField Password;
     private javax.swing.JButton SignIn;
     private javax.swing.JButton SignUpButton;
     private javax.swing.JTextField Username;
+    private javax.swing.JLabel hide;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel show;
     // End of variables declaration//GEN-END:variables
 }

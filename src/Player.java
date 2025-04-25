@@ -1,19 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
-/**
- *
- * @author neillamper
- */
-public class Player extends javax.swing.JFrame {
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import java.io.FileReader;
+import java.io.IOException;
 
-    /**
-     * Creates new form Player
-     */
-    public Player() {
+public final class Player extends javax.swing.JFrame {
+
+    private final String playerName;
+    private final String usname;
+    private String Disabled_Feature; // Instance field for the disabled feature
+
+    public Player(String playerName, String player, int par, int par1, String player1, String usname) {
+        this.playerName = playerName; // ✅ Store it for later use
+        this.usname = usname;
         initComponents();
+        jLabel1.setText("Welcome, Player " + playerName + "!"); // DYNAMIC GREETING
+        Current_Disabled_Feature(); // Dynamically enable/disable buttons based on Disabled_Feature
     }
 
     /**
@@ -25,69 +29,112 @@ public class Player extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        CreateQuiz = new javax.swing.JButton();
+        CreateQuiz1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        startGameButton = new javax.swing.JButton();
+        profileButton = new javax.swing.JButton();
+        leaderboardButton = new javax.swing.JButton();
+        historyButton = new javax.swing.JButton();
         Logout = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        CreateQuiz.setBackground(new java.awt.Color(51, 0, 153));
+        CreateQuiz.setFont(new java.awt.Font("OCR A Extended", 1, 14)); // NOI18N
+        CreateQuiz.setForeground(new java.awt.Color(255, 255, 255));
+        CreateQuiz.setText("Create Quiz");
+        CreateQuiz.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        CreateQuiz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateQuizActionPerformed(evt);
+            }
+        });
 
+        CreateQuiz1.setBackground(new java.awt.Color(51, 0, 153));
+        CreateQuiz1.setFont(new java.awt.Font("OCR A Extended", 1, 14)); // NOI18N
+        CreateQuiz1.setForeground(new java.awt.Color(255, 255, 255));
+        CreateQuiz1.setText("Create Quiz");
+        CreateQuiz1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        CreateQuiz1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateQuiz1ActionPerformed(evt);
+            }
+        });
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Welcome, Player (...)!");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, -1, -1));
 
-        jButton1.setText("Start Game");
+        startGameButton.setBackground(new java.awt.Color(0, 51, 255));
+        startGameButton.setFont(new java.awt.Font("OCR A Extended", 1, 14)); // NOI18N
+        startGameButton.setForeground(new java.awt.Color(255, 255, 255));
+        startGameButton.setText("Start Game");
+        startGameButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        startGameButton.setMaximumSize(new java.awt.Dimension(96, 19));
+        startGameButton.setMinimumSize(new java.awt.Dimension(96, 19));
+        startGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startGameButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(startGameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 150, 40));
 
-        jButton2.setText("Profile");
+        profileButton.setBackground(new java.awt.Color(0, 51, 255));
+        profileButton.setFont(new java.awt.Font("OCR A Extended", 1, 14)); // NOI18N
+        profileButton.setForeground(new java.awt.Color(255, 255, 255));
+        profileButton.setText("Profile");
+        profileButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        profileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profileButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(profileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 150, 40));
 
-        jButton3.setText("Leaderboards");
+        leaderboardButton.setBackground(new java.awt.Color(0, 51, 255));
+        leaderboardButton.setFont(new java.awt.Font("OCR A Extended", 1, 14)); // NOI18N
+        leaderboardButton.setForeground(new java.awt.Color(255, 255, 255));
+        leaderboardButton.setText("Leaderboards");
+        leaderboardButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        leaderboardButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leaderboardButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(leaderboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 150, 40));
 
-        jButton4.setText("History");
+        historyButton.setBackground(new java.awt.Color(0, 51, 255));
+        historyButton.setFont(new java.awt.Font("OCR A Extended", 1, 14)); // NOI18N
+        historyButton.setForeground(new java.awt.Color(255, 255, 255));
+        historyButton.setText("History");
+        historyButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        historyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historyButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(historyButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, 150, 40));
 
+        Logout.setBackground(new java.awt.Color(0, 51, 255));
+        Logout.setFont(new java.awt.Font("OCR A Extended", 1, 14)); // NOI18N
+        Logout.setForeground(new java.awt.Color(255, 0, 0));
         Logout.setText("Logout");
+        Logout.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LogoutActionPerformed(evt);
             }
         });
+        jPanel1.add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 430, 150, 40));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4)
-                            .addComponent(Logout))))
-                .addContainerGap(135, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Logout)
-                .addContainerGap(84, Short.MAX_VALUE))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/GameOn! (Blue BG).png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,53 +152,127 @@ public class Player extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
-        SignIn b = new SignIn();
-        b.setVisible(true);
-        setVisible(false);
+        new SignIn(usname, "pass").setVisible(true); // Open the SignIn JFrame
+        this.dispose(); // Dispose this JFrame and release resources
     }//GEN-LAST:event_LogoutActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void leaderboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leaderboardButtonActionPerformed
+        this.dispose();
+        // Navigate to the Leaderboard with the player's details
+        new Leaderboard(null, null, playerName, usname).setVisible(true);
+    }//GEN-LAST:event_leaderboardButtonActionPerformed
+
+    private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyButtonActionPerformed
+        this.dispose();
+        new History(null, null, playerName, usname).setVisible(true);
+    }//GEN-LAST:event_historyButtonActionPerformed
+
+    private void startGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameButtonActionPerformed
+        this.dispose();
+        new QuizSelection(playerName, "Player", "Player", usname).setVisible(true);
+    }//GEN-LAST:event_startGameButtonActionPerformed
+
+    private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
+        this.dispose();
+        // Pass the correct username to the Profile constructor
+        new Profile(usname).setVisible(true);
+    }//GEN-LAST:event_profileButtonActionPerformed
+
+    private void CreateQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateQuizActionPerformed
+
+    }//GEN-LAST:event_CreateQuizActionPerformed
+
+    private void CreateQuiz1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateQuiz1ActionPerformed
+
+    }//GEN-LAST:event_CreateQuiz1ActionPerformed
+
+    public void Current_Disabled_Feature() {
+        Disabled_Feature = ""; // Default value in case of error or missing data
+
+        try (FileReader reader = new FileReader("src/UserData.json")) {
+            // Parse the JSON file
+            JSONParser parser = new JSONParser();
+            JSONObject data = (JSONObject) parser.parse(reader);
+
+            // Get the "Accounts" array
+            JSONArray accounts = (JSONArray) data.get("Accounts");
+
+            // Search for the account matching the current username
+            for (Object obj : accounts) {
+                JSONObject account = (JSONObject) obj;
+                String username = (String) account.get("username");
+
+                if (username.equals(playerName)) {
+                    // Get the disabledFeature value
+                    Object disabledFeatureObject = account.get("disabledFeature");
+
+                    // Reset all buttons to enabled (default state)
+                    resetAllButtonsToEnabled();
+
+                    // Check if disabledFeature is an array or single string
+                    switch (disabledFeatureObject) {
+                        case JSONArray disabledFeaturesArray -> {
+                            // Disable buttons based on the array contents
+                            for (Object feature : disabledFeaturesArray) {
+                                String featureName = (String) feature;
+                                
+                                disableButton(featureName);
+                            }
+                        }
+                        case String string -> {
+                            // Handle disabledFeature as a single string (fallback for older format)
+                            Disabled_Feature = string;
+                            disableButton(Disabled_Feature);
+                        }
+                        default -> {
+                        }
+                    }
+
+                    break; // Exit loop once the matching account is found
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Player.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Player.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Player.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Player.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        } catch (IOException | ParseException e) {
+            // Log the exception for debugging
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Player().setVisible(true);
-            }
+        }
+    }
+
+    private void resetAllButtonsToEnabled() {
+        startGameButton.setEnabled(true);
+        leaderboardButton.setEnabled(true);
+        historyButton.setEnabled(true);
+        profileButton.setEnabled(true);
+    }
+
+    private void disableButton(String featureName) {
+        switch (featureName) {
+            case "StartGame" ->
+                startGameButton.setEnabled(false);
+            case "Leaderboard" ->
+                leaderboardButton.setEnabled(false);
+            case "History" ->
+                historyButton.setEnabled(false);
+            case "Profile" ->
+                profileButton.setEnabled(false);
+        }
+    }
+
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(() -> {
+            new Player("TestName", "Player", 1, 2, "Player", "Player").setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CreateQuiz;
+    private javax.swing.JButton CreateQuiz1;
     private javax.swing.JButton Logout;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton historyButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton leaderboardButton;
+    private javax.swing.JButton profileButton;
+    private javax.swing.JButton startGameButton;
     // End of variables declaration//GEN-END:variables
 }

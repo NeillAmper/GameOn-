@@ -15,14 +15,15 @@ import org.json.simple.parser.ParseException;
 public class SignUp extends javax.swing.JFrame {
 
     private static String addname, addpass, addtype;
-
-    private static final String FILE_PATH = "src/Database.json";
+    private final String usname;
+    private static final String FILE_PATH = "src/UserData.json";
     private static final JSONParser jsonParser2 = new JSONParser();
     private static JSONObject record = new JSONObject();
     private static JSONArray userlist = new JSONArray();
 
-    public SignUp() {
+    public SignUp(String usname) {
         initComponents();
+        this.usname = usname;
     }
 
     /**
@@ -39,79 +40,63 @@ public class SignUp extends javax.swing.JFrame {
         Username = new javax.swing.JTextField();
         Password = new javax.swing.JTextField();
         ConfirmPassword = new javax.swing.JTextField();
-        Type = new javax.swing.JComboBox<>();
+        TypeComboBox = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        SignUpButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
         jLabel1.setText("Create Account");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
 
+        Username.setFont(new java.awt.Font("OCR A Extended", 1, 14)); // NOI18N
         Username.setText("Username");
+        jPanel1.add(Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 220, 40));
 
+        Password.setFont(new java.awt.Font("OCR A Extended", 1, 14)); // NOI18N
         Password.setText("Password");
+        jPanel1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 220, 40));
 
+        ConfirmPassword.setFont(new java.awt.Font("OCR A Extended", 1, 14)); // NOI18N
         ConfirmPassword.setText("Confirm Password");
+        jPanel1.add(ConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 220, 40));
 
-        Type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Player", "Game Master" }));
+        TypeComboBox.setFont(new java.awt.Font("OCR A Extended", 1, 14)); // NOI18N
+        TypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select User Type", "Player", "Game Master" }));
+        jPanel1.add(TypeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 220, 40));
 
+        jButton1.setBackground(new java.awt.Color(204, 0, 51));
+        jButton1.setFont(new java.awt.Font("OCR A Extended", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Sign In");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, 160, 40));
 
-        jButton2.setText("Sign Up");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        SignUpButton.setBackground(new java.awt.Color(204, 0, 51));
+        SignUpButton.setFont(new java.awt.Font("OCR A Extended", 1, 18)); // NOI18N
+        SignUpButton.setForeground(new java.awt.Color(255, 255, 255));
+        SignUpButton.setText("Sign Up");
+        SignUpButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        SignUpButton.setVerifyInputWhenFocusTarget(false);
+        SignUpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                SignUpButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(SignUpButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 160, 40));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ConfirmPassword)
-                            .addComponent(Password)
-                            .addComponent(Username))
-                        .addGap(93, 93, 93))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jButton2))
-                            .addComponent(Type, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sign up BG.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 510));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,57 +113,84 @@ public class SignUp extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed
         String password = Password.getText();
         String confirmPassword = ConfirmPassword.getText();
-        String userType = Type.getSelectedItem().toString();
-        //These lines of code retrieve user input from text fields and remove any spaces, declaring and initializing to store the input.
+        String userCategory = TypeComboBox.getSelectedItem().toString();
+        String username = Username.getText();
+
+        // Validate inputs
+        if (username.equals("Username")) {
+            JOptionPane.showMessageDialog(null, "Please enter a Username", "Input Information", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (password.equals("Password")) {
+            JOptionPane.showMessageDialog(null, "Please enter a Password", "Input Information", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (userCategory.equals("Select User Type")) {
+            JOptionPane.showMessageDialog(null, "Please select a user type!", "Invalid Selection", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
         if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(null, "Passwords do not match! Please enter matching passwords.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
-            // These lines of code prompts and checks if the password field does not match, asking the user to enter exact same password.
         }
 
+        try {
+            filecheck(); // Ensure the file and structure are ready
+        } catch (IOException | ParseException ex) {
+            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Check if the username already exists
+        if (isUsernameTaken(username)) {
+            JOptionPane.showMessageDialog(null, "Username already exists. Please choose a different username.", "Duplicate Username", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Confirm user addition
         int confirm = JOptionPane.showConfirmDialog(null,
                 "Are you sure you want to add this user?",
                 "Confirm User Addition",
                 JOptionPane.YES_NO_OPTION);
-        // These lines of code shows a confirmation prompt, having two options such as yes and no.
 
         if (confirm == JOptionPane.YES_OPTION) {
-            try {
-                filecheck();
-             ////This lines of code handles errors and prompts an error message.
-            } catch (IOException | ParseException ex) {
-                Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            // Gather user input
             addname = Username.getText();
             addpass = Password.getText();
-            addtype = Type.getSelectedItem().toString();
+            addtype = TypeComboBox.getSelectedItem().toString();
 
+            // Create the new user object with the required structure
             JSONObject newUser = new JSONObject();
             newUser.put("username", addname);
             newUser.put("password", addpass);
             newUser.put("type", addtype);
+            newUser.put("status", "Accessible"); // Default status to "Disabled"
+            newUser.put("disabledFeature", ""); // Ensure "disabledFeature" is set to "None"
+
+            // Add the new user to the user list
             userlist.add(newUser);
-            record.put("users", userlist);
+            record.put("Accounts", userlist);
 
             try {
-                save();
+                save(); // Save the updated JSON structure to the file
             } catch (IOException ex) {
                 Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
             }
+
             JOptionPane.showMessageDialog(null, "Successfully Added into the Database...");
-            //This prompts if the user pressed Yes. Therefore adding it to the json file.
         } else {
             JOptionPane.showMessageDialog(null, "User addition canceled.", "Canceled", JOptionPane.INFORMATION_MESSAGE);
-            //This if no.
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+
+    }//GEN-LAST:event_SignUpButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        SignIn a = new SignIn();
+        SignIn a = new SignIn(usname, "test");
         a.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -189,7 +201,8 @@ public class SignUp extends javax.swing.JFrame {
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if (!"Nimbus".equals(info.getName())) {
+                } else {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -199,7 +212,7 @@ public class SignUp extends javax.swing.JFrame {
         }
 
         java.awt.EventQueue.invokeLater(() -> {
-            new SignUp().setVisible(true);
+            new SignUp("Tets").setVisible(true);
         });
     }
 
@@ -218,12 +231,22 @@ public class SignUp extends javax.swing.JFrame {
                 reader.close();
                 try (FileReader reader2 = new FileReader(FILE_PATH)) {
                     record = (JSONObject) jsonParser2.parse(reader2);
-                    userlist = (JSONArray) record.get("users");
+                    userlist = (JSONArray) record.get("Accounts");
                 } catch (IOException a) {
                     System.out.println("error");
                 }
             }
         }
+    }
+
+    private boolean isUsernameTaken(String username) {
+        for (Object userObject : userlist) {
+            JSONObject user = (JSONObject) userObject;
+            if (user.get("username").toString().equalsIgnoreCase(username)) {
+                return true; // Username exists
+            }
+        }
+        return false; // Username does not exist
     }
 
     public static void save() throws IOException {
@@ -235,11 +258,12 @@ public class SignUp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ConfirmPassword;
     private javax.swing.JTextField Password;
-    private javax.swing.JComboBox<String> Type;
+    private javax.swing.JButton SignUpButton;
+    private javax.swing.JComboBox<String> TypeComboBox;
     private javax.swing.JTextField Username;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
